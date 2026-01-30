@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { forkJoin } from 'rxjs';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { environment } from '../../../environments/environment';
 
 interface Article { _id: string; title: string; content?: string; image?: string; }
 interface Event { _id: string; title: string; date: string; location: string; image?: string; }
@@ -27,13 +28,11 @@ export class HomeComponent implements OnInit {
   isLoading = true;
   errorMessage = '';
 
-  // === Formulaire contact ===
   contactForm: FormGroup;
   isSubmitting = false;
   successMessage = '';
   errorMessageForm = '';
 
-  // === Events un à la fois ===
   activeIndex = 0;
 
   constructor(private http: HttpClient, private fb: FormBuilder) {
@@ -46,11 +45,16 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadData();
+  }
+
+  loadData() {
+    this.isLoading = true;
     forkJoin({
-      articles: this.http.get<Article[]>('http://localhost:5000/api/articles?limit=3'),
-      events: this.http.get<Event[]>('http://localhost:5000/api/events'),
-      partners: this.http.get<Partner[]>('http://localhost:5000/api/partners'),
-      bureau: this.http.get<Agent[]>('http://localhost:5000/api/agents')
+      articles: this.http.get<Article[]>(`${environment.apiUrl}/articles?limit=3`),
+      events: this.http.get<Event[]>(`${environment.apiUrl}/events`),
+      partners: this.http.get<Partner[]>(`${environment.apiUrl}/partners`),
+      bureau: this.http.get<Agent[]>(`${environment.apiUrl}/agents`)
     }).subscribe({
       next: ({ articles, events, partners, bureau }) => {
         const now = new Date();
@@ -60,19 +64,19 @@ export class HomeComponent implements OnInit {
         this.bureau = bureau ?? [];
         this.isLoading = false;
 
-        // Auto-slide toutes les 5 secondes
         if (this.events.length > 1) {
           setInterval(() => this.nextEvent(), 5000);
         }
       },
-      error: () => {
+      error: (err) => {
+        console.error('Erreur API:', err);
         this.errorMessage = 'Impossible de charger les données.';
         this.isLoading = false;
       }
     });
   }
 
-  // === Navigation Events ===
+  // === Carousel Events ===
   nextEvent() {
     if (this.events.length === 0) return;
     this.activeIndex = (this.activeIndex + 1) % this.events.length;
@@ -83,7 +87,7 @@ export class HomeComponent implements OnInit {
     this.activeIndex = (this.activeIndex - 1 + this.events.length) % this.events.length;
   }
 
-  // === Méthode envoi message ===
+  // === Formulaire contact ===
   onSubmitContact() {
     if (this.contactForm.invalid) return;
 
@@ -91,7 +95,7 @@ export class HomeComponent implements OnInit {
     this.successMessage = '';
     this.errorMessageForm = '';
 
-    this.http.post('http://localhost:5000/api/messages', this.contactForm.value)
+    this.http.post(`${environment.apiUrl}/messages`, this.contactForm.value)
       .subscribe({
         next: (res: any) => {
           this.successMessage = res.message || 'Message envoyé avec succès !';
@@ -99,7 +103,7 @@ export class HomeComponent implements OnInit {
           this.isSubmitting = false;
         },
         error: (err) => {
-          console.error(err);
+          console.error('Erreur envoi message:', err);
           this.errorMessageForm = 'Impossible d’envoyer le message. Veuillez réessayer.';
           this.isSubmitting = false;
         }
