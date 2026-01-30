@@ -1,16 +1,57 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  ElementRef,
+  ViewChild
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { forkJoin } from 'rxjs';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule
+} from '@angular/forms';
 import { environment } from '../../../environments/environment';
 
-interface Article { _id: string; title: string; content?: string; image?: string; }
-interface Event { _id: string; title: string; date: string; location: string; image?: string; }
-interface Partner { _id: string; name: string; logo: string; }
-interface Agent { fullName: string; role: string; photo?: string; email?: string; phone?: string; }
+/* =====================
+   Interfaces
+===================== */
+interface Article {
+  _id: string;
+  title: string;
+  content?: string;
+  image?: string;
+}
 
+interface Event {
+  _id: string;
+  title: string;
+  date: string;
+  location: string;
+  image?: string;
+}
+
+interface Partner {
+  _id: string;
+  name: string;
+  logo: string;
+}
+
+interface Agent {
+  fullName: string;
+  role: string;
+  photo?: string;
+  email?: string;
+  phone?: string;
+}
+
+/* =====================
+   Component
+===================== */
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -18,24 +59,35 @@ interface Agent { fullName: string; role: string; photo?: string; email?: string
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
 
+  /* ===== HERO VIDEO ===== */
+  @ViewChild('heroVideo') heroVideo!: ElementRef<HTMLVideoElement>;
+
+  /* ===== DATA ===== */
   articles: Article[] = [];
   events: Event[] = [];
   partners: Partner[] = [];
   bureau: Agent[] = [];
 
+  /* ===== UI STATES ===== */
   isLoading = true;
   errorMessage = '';
 
+  /* ===== CONTACT FORM ===== */
   contactForm: FormGroup;
   isSubmitting = false;
   successMessage = '';
   errorMessageForm = '';
 
+  /* ===== EVENTS CAROUSEL ===== */
   activeIndex = 0;
+  private eventInterval: any;
 
-  constructor(private http: HttpClient, private fb: FormBuilder) {
+  constructor(
+    private http: HttpClient,
+    private fb: FormBuilder
+  ) {
     this.contactForm = this.fb.group({
       fullName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -44,12 +96,31 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  /* =====================
+     LIFECYCLE
+  ===================== */
   ngOnInit(): void {
     this.loadData();
   }
 
-  loadData() {
+  ngAfterViewInit(): void {
+    // Fix autoplay vidéo (desktop + mobile)
+    if (this.heroVideo) {
+      const video = this.heroVideo.nativeElement;
+      video.muted = true;
+      video.play().catch(() => {
+        video.setAttribute('muted', '');
+        video.play();
+      });
+    }
+  }
+
+  /* =====================
+     LOAD DATA
+  ===================== */
+  loadData(): void {
     this.isLoading = true;
+
     forkJoin({
       articles: this.http.get<Article[]>(`${environment.apiUrl}/articles?limit=3`),
       events: this.http.get<Event[]>(`${environment.apiUrl}/events`),
@@ -58,14 +129,17 @@ export class HomeComponent implements OnInit {
     }).subscribe({
       next: ({ articles, events, partners, bureau }) => {
         const now = new Date();
+
         this.articles = articles ?? [];
         this.events = (events ?? []).filter(e => new Date(e.date) >= now);
         this.partners = partners ?? [];
         this.bureau = bureau ?? [];
+
         this.isLoading = false;
 
+        // Auto slide events
         if (this.events.length > 1) {
-          setInterval(() => this.nextEvent(), 5000);
+          this.startEventSlider();
         }
       },
       error: (err) => {
@@ -76,35 +150,50 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  // === Carousel Events ===
-  nextEvent() {
-    if (this.events.length === 0) return;
+  /* =====================
+     EVENTS SLIDER
+  ===================== */
+  startEventSlider(): void {
+    clearInterval(this.eventInterval);
+    this.eventInterval = setInterval(() => {
+      this.nextEvent();
+    }, 5000);
+  }
+
+  nextEvent(): void {
+    if (!this.events.length) return;
     this.activeIndex = (this.activeIndex + 1) % this.events.length;
   }
 
-  prevEvent() {
-    if (this.events.length === 0) return;
-    this.activeIndex = (this.activeIndex - 1 + this.events.length) % this.events.length;
+  prevEvent(): void {
+    if (!this.events.length) return;
+    this.activeIndex =
+      (this.activeIndex - 1 + this.events.length) % this.events.length;
   }
 
-  // === Formulaire contact ===
-  onSubmitContact() {
+  /* =====================
+     CONTACT FORM
+  ===================== */
+  onSubmitContact(): void {
     if (this.contactForm.invalid) return;
 
     this.isSubmitting = true;
     this.successMessage = '';
     this.errorMessageForm = '';
 
-    this.http.post(`${environment.apiUrl}/messages`, this.contactForm.value)
+    this.http
+      .post(`${environment.apiUrl}/messages`, this.contactForm.value)
       .subscribe({
         next: (res: any) => {
-          this.successMessage = res.message || 'Message envoyé avec succès !';
+          this.successMessage =
+            res?.message || 'Message envoyé avec succès !';
           this.contactForm.reset();
           this.isSubmitting = false;
         },
         error: (err) => {
           console.error('Erreur envoi message:', err);
-          this.errorMessageForm = 'Impossible d’envoyer le message. Veuillez réessayer.';
+          this.errorMessageForm =
+            'Impossible d’envoyer le message. Veuillez réessayer.';
           this.isSubmitting = false;
         }
       });

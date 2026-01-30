@@ -60,6 +60,12 @@
   text-decoration: none;
   z-index: 11;
 }
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
 
 /* MOBILE */
 @media (max-width: 768px) {
@@ -643,4 +649,15 @@ about
   .home-contact h2 { font-size: 1.9rem; }
   .home-contact p { font-size: 1rem; }
   .contact-form input, .contact-form textarea, .contact-form button { font-size: 1rem; }
+}
+@media (max-width: 768px) {
+  .hero-actions {
+    flex-direction: row;
+    gap: 14px;
+  }
+
+  .hero-btn {
+    padding: 12px 22px;
+    font-size: 0.95rem;
+  }
 }

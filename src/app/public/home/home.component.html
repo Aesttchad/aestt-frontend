@@ -1,8 +1,16 @@
 <section class="hero-video">
-  <video autoplay muted loop playsinline class="hero-bg-video">
-    <source src="assets/HERO.mp4" type="video/mp4">
-    Votre navigateur ne supporte pas la vidéo.
-  </video>
+  <video
+  #heroVideo
+  muted
+  loop
+  playsinline
+  preload="auto"
+  class="hero-bg-video"
+>
+  <source src="assets/HERO.mp4" type="video/mp4">
+   Votre navigateur ne supporte pas la vidéo.
+</video>
+   
 
   <div class="hero-overlay"></div>
 
@@ -15,8 +23,10 @@
       Les étudiants et stagiaires tchadiens en Tunisie
     </p>
 
-    <a class="hero-btn" href="/about">Découvrir l’AESTT</a>
-    <a class="hero-btn" href="/join">Nous Rejoindre?</a>
+ <div class="hero-actions">
+  <a class="hero-btn" href="/about">Découvrir l’AESTT</a>
+  <a class="hero-btn" href="/join">Nous Rejoindre ?</a>
+</div>
 
   </div>
 </section>
