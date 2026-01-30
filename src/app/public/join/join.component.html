@@ -1,0 +1,21 @@
+<section class="section join">
+  <h1>Adhérer à l’AESTT</h1>
+  <p>Remplissez ce formulaire pour rejoindre l’association</p>
+
+  <form (ngSubmit)="submit()">
+    <input type="text" [(ngModel)]="member.fullName" name="fullName" placeholder="Nom complet" required />
+
+    <input type="text" [(ngModel)]="member.university" name="university" placeholder="Université" required />
+
+    <input type="text" [(ngModel)]="member.fieldOfStudy" name="fieldOfStudy" placeholder="Filière" required />
+
+    <input type="email" [(ngModel)]="member.email" name="email" placeholder="Email" required />
+
+    <input type="text" [(ngModel)]="member.phone" name="phone" placeholder="Téléphone (optionnel)" />
+
+    <button type="submit">Envoyer la demande</button>
+
+    <p class="success" *ngIf="success">{{ success }}</p>
+    <p class="error" *ngIf="error">{{ error }}</p>
+  </form>
+</section>

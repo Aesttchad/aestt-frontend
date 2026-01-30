@@ -1,0 +1,26 @@
+h1 {
+  margin-bottom: 1rem;
+}
+
+.btn {
+  margin-bottom: 1rem;
+  &.btn-primary { background-color: #007bff; color: #fff; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; }
+  &.btn-warning { background-color: #ffc107; color: #000; border: none; padding: 0.3rem 0.6rem; border-radius: 5px; cursor: pointer; }
+  &.btn-danger { background-color: #dc3545; color: #fff; border: none; padding: 0.3rem 0.6rem; border-radius: 5px; cursor: pointer; }
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+
+  th, td {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+}

@@ -1,0 +1,28 @@
+<h1>Gestion des événements</h1>
+<button routerLink="/admin/events/new" class="btn btn-primary">+ Ajouter un événement</button>
+
+<table *ngIf="!isLoading; else loading" class="table">
+  <thead>
+    <tr>
+      <th>Titre</th>
+      <th>Date</th>
+      <th>Statut</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let e of events">
+      <td>{{ e.title }}</td>
+      <td>{{ e.date | date:'shortDate' }}</td>
+      <td>{{ e.status }}</td>
+      <td>
+        <button [routerLink]="['/admin/events/edit', e._id]" class="btn btn-sm btn-warning">Modifier</button>
+        <button (click)="deleteEvent(e._id!)" class="btn btn-sm btn-danger">Supprimer</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #loading>
+  <p>Chargement des événements...</p>
+</ng-template>

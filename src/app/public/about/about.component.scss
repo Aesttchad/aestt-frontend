@@ -1,0 +1,169 @@
+/* ================== SECTION ABOUT / VALEURS / BUREAU ================== */
+
+/* ================= SECTION PRINCIPALE ================= */
+.section {
+  padding: 3rem 2rem;
+
+  h1, h2 {
+    text-align: center;
+    margin-bottom: 1.2rem;
+  }
+
+  p {
+    text-align: center;
+    color: #555;
+    max-width: 900px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+}
+
+/* HERO LITE */
+.hero-lite {
+  background: #f9f9f9;
+  border-radius: 1.5rem;
+  margin: 2rem;
+}
+
+/* BUTTON CTA */
+.btn-primary {
+  display: block;
+  margin: 2rem auto 0;
+  padding: 0.75rem 1.8rem;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 0.6rem;
+  font-weight: 600;
+  width: fit-content;
+}
+
+/* ================= GRID PRINCIPALE ================= */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+}
+
+/* ================= VALEURS ================= */
+.values-grid {
+  margin-top: 2.5rem;
+
+  .card {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 1.2rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    text-align: center;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+
+    /* Zigzag léger */
+    &:nth-child(1),
+    &:nth-child(3) {
+      transform: translateY(20px);
+    }
+    &:nth-child(2),
+    &:nth-child(4) {
+      transform: translateY(-20px);
+    }
+
+    &:hover {
+      transform: translateY(0) scale(1.05);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+    }
+
+    .icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+  }
+}
+
+/* ================= BUREAU EXECUTIF ================= */
+.alt {
+  background: #f5f7fa;
+}
+
+.alt .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+}
+
+.member-card {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 1.2rem;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  animation: dropIn 0.8s ease forwards;
+  opacity: 0;
+  transform: translateY(-40px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:nth-child(1) { animation-delay: 0.1s; }
+  &:nth-child(2) { animation-delay: 0.2s; }
+  &:nth-child(3) { animation-delay: 0.3s; }
+  &:nth-child(4) { animation-delay: 0.4s; }
+
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.18);
+  }
+
+  img {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 0.8rem;
+  }
+
+  .role {
+    font-weight: 600;
+    color: #007bff;
+    margin-bottom: 0.5rem;
+  }
+}
+
+@keyframes dropIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.error {
+  text-align: center;
+  color: red;
+  margin-bottom: 1rem;
+}
+
+/* ================= MOBILE / TABLETTE ================= */
+@media (max-width: 992px) {
+  /* Valeurs grid : 2 par ligne */
+  .values-grid {
+    grid-template-columns: repeat(2, 1fr);
+
+    .card:nth-child(1),
+    .card:nth-child(2),
+    .card:nth-child(3),
+    .card:nth-child(4) {
+      transform: translateY(0); /* supprime zigzag pour tablette */
+    }
+  }
+
+  /* Bureau exécutif : 1 par ligne */
+  .alt .grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* Très petit écran : 1 carte par ligne */
+@media (max-width: 480px) {
+  .values-grid {
+    grid-template-columns: 1fr;
+  }
+}

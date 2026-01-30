@@ -1,0 +1,267 @@
+@use "sass:color";
+
+/* =========================
+   VARIABLES
+========================= */
+$primary: #002664;
+$accent: #fecb00;
+$light: #f8fafc;
+$gray: #6b7280;
+$success: #10b981;
+$error: #ef4444;
+
+/* =========================
+   HERO
+========================= */
+.contact-hero {
+  background: linear-gradient(
+    135deg,
+    $primary 0%,
+    color.adjust($primary, $lightness: -12%) 100%
+  );
+  color: white;
+  text-align: center;
+  padding: 2.2rem 1rem; /* ⬅️ hero plus petit */
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle at top,
+      rgba(255, 255, 255, 0.15),
+      transparent 60%
+    );
+  }
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
+/* =========================
+   SECTION
+========================= */
+.contact-section {
+  padding: 4rem 1rem;
+  background: $light;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* =========================
+   GRID
+========================= */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 2.2fr 1fr; // formulaire plus large que la partie info
+  gap: 3rem;
+
+  @media (max-width: 992px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================
+   FORM CARD
+========================= */
+.contact-form-container {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+  }
+}
+
+/* =========================
+   FORM GROUP
+========================= */
+.form-group {
+  margin-bottom: 1.8rem;
+
+  label {
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    display: block;
+    color: #1f2937;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 1.2rem;
+    background: #f9fafb;
+    border: 1px solid #d1d5db;
+    border-radius: 14px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+
+    &:focus {
+      outline: none;
+      background: white;
+      border-color: $primary;
+      box-shadow: 0 10px 25px rgba(0, 38, 100, 0.15);
+    }
+
+    &::placeholder {
+      color: #9ca3af;
+    }
+  }
+
+  textarea {
+    min-height: 160px;
+    resize: vertical;
+  }
+}
+
+/* =========================
+   BUTTON
+========================= */
+.submit-btn {
+  width: 100%;
+  padding: 1.2rem;
+  border-radius: 14px;
+  border: none;
+  font-size: 1.15rem;
+  font-weight: 700;
+  cursor: pointer;
+  color: white;
+  background: linear-gradient(
+    135deg,
+    $primary,
+    color.adjust($primary, $lightness: -10%)
+  );
+  transition: all 0.3s ease;
+
+  &:hover:not(:disabled) {
+    background: linear-gradient(
+      135deg,
+      color.adjust($primary, $lightness: -5%),
+      color.adjust($primary, $lightness: -15%)
+    );
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(0, 38, 100, 0.25);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+/* =========================
+   INFO CARD
+========================= */
+.contact-info {
+  background: linear-gradient(180deg, #fff, #f9fafb);
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-self: start; // la carte s'adapte à la hauteur du formulaire
+}
+
+/* =========================
+   INFO ITEMS
+========================= */
+.info-item {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+
+  .icon {
+    font-size: 1.6rem;
+    flex-shrink: 0;
+  }
+
+  strong {
+    display: block;
+    color: #1f2937;
+  }
+
+  p {
+    margin: 0;
+    color: $gray;
+  }
+
+  a {
+    color: $primary;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+/* =========================
+   SOCIAL LINKS
+========================= */
+.social-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+
+  .social-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 38, 100, 0.08);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    overflow: hidden;
+
+    img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain; // garde proportions sans étirer
+    }
+
+    &:hover {
+      background: $accent;
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(254, 203, 0, 0.35);
+
+      img {
+        filter: brightness(0) invert(1);
+      }
+    }
+  }
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 992px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-info {
+    margin-top: 2rem;
+  }
+}

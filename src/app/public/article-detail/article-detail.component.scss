@@ -1,0 +1,83 @@
+@use "sass:color";
+
+/* =========================
+   VARIABLES
+========================= */
+$primary: #002664;
+$accent: #fecb00;
+$light: #f8fafc;
+$gray: #6b7280;
+
+/* =========================
+   SECTION
+========================= */
+.section {
+  max-width: 900px;
+  margin: auto;
+  padding: 3rem 1.2rem;
+}
+
+/* =========================
+   TITRE ARTICLE
+========================= */
+h1 {
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  font-weight: 800;
+  color: $primary;
+  margin-bottom: 0.6rem;
+}
+
+/* =========================
+   DATE
+========================= */
+span {
+  display: block;
+  font-size: 0.85rem;
+  color: $gray;
+  margin-bottom: 2rem;
+}
+
+/* =========================
+   CONTENU
+========================= */
+.content {
+  background: $light;
+  padding: 2.2rem;
+  border-radius: 18px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+  line-height: 1.75;
+
+  p {
+    font-size: 1rem;
+    color: #1f2937;
+    margin-bottom: 1.2rem;
+  }
+
+  strong {
+    color: $primary;
+  }
+}
+
+/* =========================
+   LIEN RETOUR
+========================= */
+a {
+  display: inline-block;
+  margin-top: 2rem;
+  font-weight: 600;
+  color: $primary;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+/* =========================
+   LOADING / ERREUR
+========================= */
+.section p,
+.section div {
+  text-align: center;
+  color: $gray;
+}

@@ -1,0 +1,34 @@
+<section class="admin-page">
+  <h1>Demandes d’adhésion</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Université</th>
+        <th>Filière</th>
+        <th>Email</th>
+        <th>Statut</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let m of members">
+        <td>{{ m.fullName }}</td>
+        <td>{{ m.university }}</td>
+        <td>{{ m.fieldOfStudy }}</td>
+        <td>{{ m.email }}</td>
+        <td>
+          <span [class.pending]="m.status === 'en attente'">
+            {{ m.status }}
+          </span>
+        </td>
+        <td>
+          <button *ngIf="m.status === 'en attente'" (click)="validate(m)">Valider</button>
+          <button class="danger" (click)="delete(m._id!)">Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>

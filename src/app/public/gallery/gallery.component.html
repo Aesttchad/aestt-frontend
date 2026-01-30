@@ -1,0 +1,25 @@
+<section class="section hero-lite">
+  <h1>Galerie Photos</h1>
+  <p>Découvrez les moments forts des activités AESTT</p>
+</section>
+
+<section class="section" *ngIf="!isLoading; else loading">
+  <div *ngIf="errorMessage">{{ errorMessage }}</div>
+
+  <div class="grid" *ngIf="galleries.length > 0">
+<div
+  class="gallery-card"
+  *ngFor="let gallery of galleries"
+  [routerLink]="[gallery._id]"
+>      <img [src]="gallery.images[0] || 'assets/default-gallery.jpg'" alt="image galerie" />
+      <div class="content">
+        <h3>{{ gallery.title }}</h3>
+        <p>{{ gallery.description | slice:0:100 }}...</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #loading>
+  <p>Chargement des galeries...</p>
+</ng-template>

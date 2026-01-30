@@ -1,0 +1,38 @@
+.admin-container {
+  display: flex;
+  height: 100vh;
+  background: #f4f6f8;
+
+  .admin-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    header {
+      height: 60px;
+      background: #0f766e;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 1.5rem;
+
+      .btn-logout {
+        background: #e11d48;
+        border: none;
+        color: #fff;
+        padding: 0.4rem 0.8rem;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &:hover { background: #b91c1c; }
+      }
+    }
+
+    main {
+      padding: 1.5rem;
+      overflow-y: auto;
+      flex: 1;
+    }
+  }
+}

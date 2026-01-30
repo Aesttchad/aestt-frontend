@@ -1,0 +1,19 @@
+<section class="admin-page">
+  <div class="header">
+    <h1>Galeries</h1>
+    <a routerLink="/admin/gallery/new" class="btn">+ Nouvelle galerie</a>
+  </div>
+
+  <div *ngIf="isLoading">Chargement...</div>
+
+  <div class="grid">
+    <div class="card" *ngFor="let g of galleries">
+      <img [src]="g.images[0]" />
+      <h3>{{ g.title }}</h3>
+
+      <button class="danger" (click)="delete(g._id)">
+        Supprimer
+      </button>
+    </div>
+  </div>
+</section>

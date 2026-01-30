@@ -1,0 +1,25 @@
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+
+  .stat-card {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
+    h2 {
+      font-size: 2rem;
+      color: #0f766e;
+    }
+
+    p {
+      margin-top: 0.5rem;
+      font-weight: 500;
+      color: #333;
+    }
+  }
+}

@@ -1,0 +1,43 @@
+<section class="section hero-lite">
+  <h1>Espace Étudiants</h1>
+  <p>Informations utiles pour les étudiants tchadiens en Tunisie</p>
+</section>
+
+<section class="section" *ngIf="!isLoading; else loading">
+  <!-- Message d'erreur -->
+  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+  <!-- Tabs catégories -->
+  <div class="tabs">
+    <button *ngFor="let c of categories"
+            (click)="select(c)"
+            [class.active]="selected === c">
+      {{ c }}
+    </button>
+  </div>
+
+  <!-- Infos filtrées -->
+  <div class="info-grid" *ngIf="filteredInfos && filteredInfos.length > 0; else noInfos">
+    <div class="info-card" *ngFor="let info of filteredInfos">
+      <h3>{{ info.title }}</h3>
+      <p>{{ info.content }}</p>
+
+      <!-- Documents attachés -->
+      <div class="attachments" *ngIf="info.attachments && info.attachments.length > 0">
+        <a *ngFor="let att of info.attachments" [href]="att" target="_blank" rel="noopener noreferrer">
+          📎 Voir document
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Aucune info -->
+  <ng-template #noInfos>
+    <p>Aucune information disponible dans cette catégorie.</p>
+  </ng-template>
+</section>
+
+<!-- Loading -->
+<ng-template #loading>
+  <p>Chargement des informations...</p>
+</ng-template>

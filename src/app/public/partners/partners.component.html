@@ -1,0 +1,21 @@
+<section class="section hero-lite">
+  <h1>Nos Partenaires</h1>
+  <p>Découvrez les institutions et sponsors qui soutiennent l’AESTT</p>
+</section>
+
+<section class="section" *ngIf="!isLoading; else loading">
+  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+  <div class="partners-grid" *ngIf="partners.length > 0">
+    <div class="partner-card" *ngFor="let p of partners">
+      <img [src]="p.logo || 'assets/default-partner.png'" alt="{{ p.name }}" />
+      <h3>{{ p.name }}</h3>
+      <p *ngIf="p.description">{{ p.description }}</p>
+      <a *ngIf="p.website" [href]="p.website" target="_blank">Visiter le site</a>
+    </div>
+  </div>
+</section>
+
+<ng-template #loading>
+  <p>Chargement des partenaires...</p>
+</ng-template>

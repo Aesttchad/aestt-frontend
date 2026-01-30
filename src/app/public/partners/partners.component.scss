@@ -1,0 +1,67 @@
+.section {
+  padding: 2rem;
+  h1 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+    font-size: 2.5rem;
+  }
+  p {
+    text-align: center;
+    color: #555;
+    margin-bottom: 2rem;
+  }
+}
+
+.error {
+  color: red;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.partners-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+
+  .partner-card {
+    background: #fff;
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+
+    img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      border-radius: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.25rem;
+    }
+
+    p {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    a {
+      margin-top: auto;
+      text-decoration: none;
+      color: #007bff;
+      font-weight: 600;
+      transition: color 0.2s;
+
+      &:hover {
+        color: #0056b3;
+      }
+    }
+  }
+}

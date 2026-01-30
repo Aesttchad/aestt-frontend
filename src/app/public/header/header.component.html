@@ -1,0 +1,27 @@
+<nav class="navbar">
+  <div class="container">
+    <div class="logo">
+      <img src="assets/olo.png" alt="AESTT Logo" />
+      <span>AESTT</span>
+    </div>
+
+    <ul class="nav-links" [class.active]="showMenu">
+      <li><a routerLink="/" (click)="closeMenu()">Accueil</a></li>
+      <li><a routerLink="/about" (click)="closeMenu()">À propos</a></li>
+      <li><a routerLink="/articles" (click)="closeMenu()">Actualités</a></li>
+      <li><a routerLink="/evenements" (click)="closeMenu()">Événements</a></li>
+      <li><a routerLink="/gallery" (click)="closeMenu()">Galerie</a></li>
+      <li><a routerLink="/espace-etudiants" (click)="closeMenu()">Espace Étudiants</a></li>
+      <li><a routerLink="/contact" (click)="closeMenu()">Contact</a></li>
+    </ul>
+
+    <div class="actions">
+      <a routerLink="/members" class="btn">Adhérer</a>
+      <div class="hamburger" (click)="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+</nav>

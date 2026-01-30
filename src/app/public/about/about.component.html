@@ -1,0 +1,92 @@
+<!-- PRESENTATION -->
+<section class="section hero-lite">
+  <h1>À propos de l’AESTT</h1>
+  <p>
+    L’Association des Étudiants et Stagiaires Tchadiens en Tunisie (AESTT)
+    est une organisation engagée dans la représentation, l’accompagnement
+    et la défense des intérêts des étudiants tchadiens vivant en Tunisie.
+    <br /><br />
+    À travers ses actions, l’AESTT œuvre pour faciliter l’intégration
+    académique et sociale, promouvoir la solidarité, encourager l’excellence
+    et renforcer la coopération avec les institutions universitaires
+    et les partenaires nationaux et internationaux.
+  </p>
+</section>
+
+<!-- VALEURS & OBJECTIFS -->
+<section class="section">
+  <h2>Nos valeurs et objectifs</h2>
+
+  <div class="grid values-grid">
+    <div class="card">
+      <span class="icon">🎓</span>
+      <h3>Accompagnement académique</h3>
+      <p>
+        Soutenir les étudiants dans leur parcours universitaire à travers
+        l’orientation, le partage d’expériences et l’accès à l’information.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">⚖️</span>
+      <h3>Défense des droits</h3>
+      <p>
+        Représenter les étudiants tchadiens auprès des institutions
+        académiques et administratives afin de défendre leurs droits
+        et intérêts légitimes.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🤝</span>
+      <h3>Solidarité et intégration</h3>
+      <p>
+        Favoriser l’entraide, l’intégration sociale et le vivre-ensemble
+        entre étudiants, tout en renforçant les liens communautaires.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🌍</span>
+      <h3>Ouverture et partenariats</h3>
+      <p>
+        Développer des partenariats durables avec les universités,
+        associations et partenaires afin de créer des opportunités
+        au bénéfice des étudiants.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- BUREAU EXECUTIF -->
+<section class="section alt">
+  <h2>Bureau Exécutif</h2>
+
+  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+  <div *ngIf="isLoading">Chargement...</div>
+
+  <div class="grid" *ngIf="!isLoading">
+    <div class="member-card" *ngFor="let member of bureau">
+      <img
+        [src]="member.photo || 'assets/default-member.png'"
+        alt="{{ member.fullName }}"
+      />
+      <h3>{{ member.fullName }}</h3>
+      <p class="role">{{ member.role }}</p>
+
+      <span *ngIf="member.email">
+        📧 <a [href]="'mailto:' + member.email">{{ member.email }}</a>
+      </span><br />
+
+      <span *ngIf="member.phone">
+        📞 {{ member.phone }}
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section">
+  <h2>Envie de rejoindre l’AESTT ?</h2>
+  <a routerLink="/adhesion" class="btn-primary">Devenir membre</a>
+</section>

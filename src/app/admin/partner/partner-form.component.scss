@@ -1,0 +1,28 @@
+form {
+  max-width: 500px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  input,
+  textarea,
+  select {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+
+  button {
+    background: #1e40af;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+
+    &:hover {
+      background: #1e3a8a;
+    }
+  }
+}

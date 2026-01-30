@@ -1,0 +1,12 @@
+<section class="admin-page">
+  <h1>Nouvelle galerie</h1>
+
+  <form (ngSubmit)="submit()">
+    <input type="text" [(ngModel)]="title" name="title" placeholder="Titre" required />
+    <textarea [(ngModel)]="description" name="description" placeholder="Description"></textarea>
+
+    <input type="file" multiple (change)="onFilesSelected($event)" />
+
+    <button type="submit">Créer</button>
+  </form>
+</section>

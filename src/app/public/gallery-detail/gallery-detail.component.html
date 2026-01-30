@@ -1,0 +1,29 @@
+<section class="section" *ngIf="!isLoading; else loading">
+  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+  <div *ngIf="gallery">
+    <h1>{{ gallery.title }}</h1>
+    <p>{{ gallery.description }}</p>
+
+    <!-- Grid des images -->
+    <div class="grid gallery-images">
+      <img 
+        *ngFor="let img of gallery.images" 
+        [src]="img || 'assets/default-gallery.jpg'" 
+        (click)="openLightbox(img)" 
+        alt="Image galerie"
+      />
+    </div>
+
+    <a routerLink="/gallery">← Retour à la galerie</a>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" *ngIf="lightboxImg" (click)="closeLightbox()">
+  <img [src]="lightboxImg" alt="Image zoomée"/>
+</div>
+
+<ng-template #loading>
+  <p>Chargement de la galerie...</p>
+</ng-template>

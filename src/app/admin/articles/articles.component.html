@@ -1,0 +1,34 @@
+<h1>Gestion des articles</h1>
+
+<a routerLink="/admin/articles/new" class="btn-add">
+  + Nouvel article
+</a>
+
+<table *ngIf="!isLoading">
+  <thead>
+    <tr>
+      <th>Titre</th>
+      <th>Auteur</th>
+      <th>Statut</th>
+      <th>Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let article of articles">
+      <td>{{ article.title }}</td>
+      <td>{{ article.author }}</td>
+      <td>
+        <span [class.published]="article.status === 'publié'">
+          {{ article.status }}
+        </span>
+      </td>
+      <td>{{ article.createdAt | date:'shortDate' }}</td>
+      <td>
+        <a [routerLink]="['/admin/articles/edit', article._id]">✏️</a>
+        <button (click)="deleteArticle(article._id)">🗑️</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,45 @@
+<h1>{{ isEdit ? 'Modifier' : 'Créer' }} un événement</h1>
+
+<div *ngIf="errorMessage">{{ errorMessage }}</div>
+
+<form (ngSubmit)="submit()">
+  <div>
+    <label>Titre</label>
+    <input type="text" [(ngModel)]="event.title" name="title" required />
+  </div>
+
+  <div>
+    <label>Description</label>
+    <textarea [(ngModel)]="event.description" name="description"></textarea>
+  </div>
+
+  <div>
+    <label>Lieu</label>
+    <input type="text" [(ngModel)]="event.location" name="location" />
+  </div>
+
+  <div>
+    <label>Date</label>
+    <input type="date" [(ngModel)]="event.date" name="date" required />
+  </div>
+
+  <div>
+    <label>Catégorie</label>
+    <input type="text" [(ngModel)]="event.category" name="category" />
+  </div>
+
+  <div>
+    <label>Image</label>
+    <input type="file" (change)="onFileChange($event)" />
+  </div>
+
+  <div>
+    <label>Statut</label>
+    <select [(ngModel)]="event.status" name="status">
+      <option value="à venir">À venir</option>
+      <option value="passé">Passé</option>
+    </select>
+  </div>
+
+  <button type="submit">{{ isEdit ? 'Modifier' : 'Créer' }}</button>
+</form>

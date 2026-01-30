@@ -1,0 +1,189 @@
+<section class="hero-video">
+  <video autoplay muted loop playsinline class="hero-bg-video">
+    <source src="assets/HERO.mp4" type="video/mp4">
+    Votre navigateur ne supporte pas la vidéo.
+  </video>
+
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <h1>
+      Unis pour représenter,<br>
+      accompagner et défendre
+    </h1>
+    <p>
+      Les étudiants et stagiaires tchadiens en Tunisie
+    </p>
+
+    <a class="hero-btn" href="/about">Découvrir l’AESTT</a>
+    <a class="hero-btn" href="/join">Nous Rejoindre?</a>
+
+  </div>
+</section>
+
+
+<section class="president-pro">
+  <div class="container president-grid">
+    <div class="president-visual">
+      <img src="assets/praestt.jpeg" alt="Président de l’AESTT">
+    </div>
+    <div class="president-text">
+      <span class="hero-badge">Message du Président</span>
+      <h2>Une vision pour les étudiants tchadiens</h2>
+      <p>
+        Chers étudiants et membres de l’AESTT, notre mission est de vous accompagner,
+        de vous inspirer et de défendre vos intérêts pour que chacun puisse réaliser
+        son potentiel. Grâce à notre engagement, nos projets et nos événements, nous
+        créons des opportunités concrètes et formons une communauté soudée, prête à
+        relever les défis de demain. Ensemble, nous bâtissons un avenir brillant pour
+        tous les étudiants tchadiens en Tunisie.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section articles-pro">
+  <div class="container">
+    <div class="section-head">
+      <h2>Actualités & Annonces</h2>
+    </div>
+
+    <div class="articles-grid">
+      <article *ngFor="let article of articles">
+        <img *ngIf="article.image" [src]="article.image">
+        <div class="content">
+          <h3>{{ article.title }}</h3>
+          <p>{{ article.content | slice:0:100 }}...</p>
+          <a [routerLink]="['/articles', article._id]">Lire l’article →</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section home-about">
+  <h2>Nos valeurs</h2>
+
+  <p class="intro">
+    L’AESTT agit pour accompagner, représenter et défendre les étudiants
+    tchadiens en Tunisie, en mettant la solidarité et l’excellence
+    au cœur de ses actions.
+  </p>
+
+  <div class="grid values-grid">
+    <div class="card">
+      <span class="icon">🎓</span>
+      <h3>Accompagnement</h3>
+      <p>Soutien académique et orientation des étudiants.</p>
+    </div>
+
+    <div class="card">
+      <span class="icon">⚖️</span>
+      <h3>Représentation</h3>
+      <p>Défense des droits et intérêts des étudiants.</p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🤝</span>
+      <h3>Solidarité</h3>
+      <p>Entraide, intégration et cohésion communautaire.</p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🌍</span>
+      <h3>Partenariats</h3>
+      <p>Ouverture et coopération institutionnelle.</p>
+    </div>
+  </div>
+
+  <a routerLink="/about" class="btn-primary">En savoir plus</a>
+</section>
+
+<section class="section bureau-pro">
+  <div class="container">
+    <div class="section-head">
+      <h2>Bureau exécutif</h2>
+      <p>L’équipe qui dirige et représente l’AESTT</p>
+    </div>
+
+    <div class="bureau-circle">
+      <div class="bureau-member" *ngFor="let member of bureau | slice:0:5">
+        <img [src]="member.photo || 'assets/default-member.png'">
+        <h4>{{ member.fullName }}</h4>
+        <span>{{ member.role }}</span>
+      </div>
+    </div>
+
+    <div class="center">
+      <a routerLink="/about" class="link-arrow">
+        Voir tous les membres du bureau →
+      </a>
+    </div>
+  </div>
+</section>
+<div class="events-slider" *ngIf="events.length > 0">
+  <div class="event-card-pro">
+    <img [src]="events[activeIndex].image || 'assets/default-event.jpg'" [alt]="events[activeIndex].title">
+    <div class="info">
+      <h4>{{ events[activeIndex].title }}</h4>
+      <span>{{ events[activeIndex].date | date:'dd MMM yyyy' }}</span>
+      <small>{{ events[activeIndex].location }}</small>
+    </div>
+  </div>
+
+  <!-- Flèches pour naviguer -->
+  <button class="prev-btn" (click)="prevEvent()">&#10094;</button>
+  <button class="next-btn" (click)="nextEvent()">&#10095;</button>
+</div>
+
+<section class="partners-section">
+  <h2>Nos partenaires, ils nous font confiance</h2>
+
+  <div class="partners-slider">
+    <div class="partners-track">
+      <!-- Premier tour -->
+      <div
+        class="partner-card"
+        *ngFor="let partner of partners"
+      >
+        <img [src]="partner.logo" [alt]="partner.name">
+        <p>{{ partner.name }}</p>
+      </div>
+
+      <!-- Dupliquer les partenaires pour un scroll continu -->
+      <div
+        class="partner-card"
+        *ngFor="let partner of partners"
+      >
+        <img [src]="partner.logo" [alt]="partner.name">
+        <p>{{ partner.name }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     FORMULAIRE DE CONTACT
+========================= -->
+<section class="home-contact">
+  <div class="container">
+    <h2>Envoyez-nous un message</h2>
+    <p>Votre message sera directement envoyé à l’administrateur.</p>
+
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmitContact()" class="contact-form">
+      <div class="form-messages">
+        <div *ngIf="successMessage" class="success">{{ successMessage }}</div>
+        <div *ngIf="errorMessageForm" class="error">{{ errorMessageForm }}</div>
+      </div>
+
+      <input formControlName="fullName" type="text" placeholder="Nom complet *" />
+      <input formControlName="email" type="email" placeholder="Email *" />
+      <input formControlName="subject" type="text" placeholder="Sujet" />
+      <textarea formControlName="message" rows="4" placeholder="Votre message *"></textarea>
+
+      <button type="submit" [disabled]="isSubmitting || contactForm.invalid">
+        {{ isSubmitting ? 'Envoi...' : 'Envoyer' }}
+      </button>
+    </form>
+  </div>
+</section>

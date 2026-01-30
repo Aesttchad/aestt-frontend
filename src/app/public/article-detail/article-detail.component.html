@@ -1,0 +1,21 @@
+<section class="section" *ngIf="!isLoading; else loading">
+  <div *ngIf="errorMessage">{{ errorMessage }}</div>
+
+  <div *ngIf="article">
+    <h1>{{ article.title }}</h1>
+    <span>{{ article.createdAt | date:'longDate' }}</span>
+
+    <div class="content">
+      <p>{{ article.content }}</p>
+      <p><strong>Auteur :</strong> {{ article.author }}</p>
+      <p *ngIf="article.category">
+        <strong>Catégorie :</strong> {{ article.category }}
+      </p>
+    </div>
+
+    <a routerLink="/articles">← Retour aux articles</a>
+  </div>
+</section>
+<ng-template #loading>
+  <p>Chargement de l'article...</p>
+</ng-template>

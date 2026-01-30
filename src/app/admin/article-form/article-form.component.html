@@ -1,0 +1,30 @@
+<h1>Nouvel article</h1>
+
+<form (ngSubmit)="submit()">
+  <input type="text" placeholder="Titre" [(ngModel)]="article.title" name="title" required>
+
+  <textarea placeholder="Contenu"
+    [(ngModel)]="article.content"
+    name="content"
+    rows="6"
+    required>
+  </textarea>
+
+  <select [(ngModel)]="article.author" name="author">
+    <option>Président</option>
+    <option>SG</option>
+    <option>Admin</option>
+    <option>Autre</option>
+  </select>
+
+  <select [(ngModel)]="article.status" name="status">
+    <option value="brouillon">Brouillon</option>
+    <option value="publié">Publié</option>
+  </select>
+
+  <input type="text" placeholder="Catégorie"
+    [(ngModel)]="article.category"
+    name="category">
+
+  <button type="submit">Enregistrer</button>
+</form>

@@ -1,0 +1,22 @@
+<h1>Nouvelle information étudiant</h1>
+
+<form (ngSubmit)="submit()">
+  <input type="text" placeholder="Titre" [(ngModel)]="info.title" name="title" required>
+
+  <textarea
+    placeholder="Contenu"
+    [(ngModel)]="info.content"
+    name="content"
+    rows="6"
+    required>
+  </textarea>
+
+  <select [(ngModel)]="info.category" name="category">
+    <option>Procédure</option>
+    <option>Université</option>
+    <option>Bourse</option>
+    <option>Conseil pratique</option>
+  </select>
+
+  <button type="submit">Enregistrer</button>
+</form>

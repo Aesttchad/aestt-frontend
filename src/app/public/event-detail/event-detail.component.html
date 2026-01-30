@@ -1,0 +1,19 @@
+<section class="section" *ngIf="!isLoading; else loading">
+  <div *ngIf="errorMessage">{{ errorMessage }}</div>
+
+  <div *ngIf="event">
+    <h1>{{ event.title }}</h1>
+    <p class="meta">📍 {{ event.location }} | 📅 {{ event.date | date:'longDate' }}</p>
+    <img [src]="event.image || 'assets/default-event.jpg'" />
+    <div class="content">
+      <p>{{ event.description }}</p>
+      <p *ngIf="event.category">Catégorie : {{ event.category }}</p>
+      <p>Status : {{ event.status }}</p>
+    </div>
+    <a routerLink="/evenements">← Retour aux événements</a>
+  </div>
+</section>
+
+<ng-template #loading>
+  <p>Chargement de l'événement...</p>
+</ng-template>

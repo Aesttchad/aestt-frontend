@@ -1,0 +1,27 @@
+<section class="section hero-lite">
+  <h1>Actualités & Communiqués</h1>
+  <p>Restez informés des activités et annonces officielles de l’AESTT</p>
+</section>
+
+<section class="section" *ngIf="!isLoading; else loading">
+  <div *ngIf="errorMessage">{{ errorMessage }}</div>
+
+  <div class="grid" *ngIf="articles.length > 0">
+    <article class="article-card"
+      *ngFor="let article of articles"
+      [routerLink]="['/articles', article._id]">
+
+      <h3>{{ article.title }}</h3>
+      <p>{{ article.content | slice:0:120 }}...</p>
+
+      <span>
+        {{ article.author }} • {{ article.createdAt | date:'longDate' }}
+      </span>
+
+      <a>Lire la suite →</a>
+    </article>
+  </div>
+</section>
+<ng-template #loading>
+  <p>Chargement de l'article...</p>
+</ng-template>

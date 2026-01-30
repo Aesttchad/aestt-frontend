@@ -1,0 +1,240 @@
+@use "sass:color";
+
+// =========================
+// VARIABLES – DRAPEAU TCHAD
+// =========================
+$bleu: #002664;
+$jaune: #FECB00;
+$rouge: #C60C30;
+$light: #f8fafc;
+$gray: #6b7280;
+
+// =========================
+// HERO – EVENTS (compact)
+// =========================
+.hero-events {
+  background: linear-gradient(
+    135deg,
+    $bleu 0%,
+    color.adjust($bleu, $lightness: -12%) 100%
+  );
+  color: $jaune; // texte jaune
+  text-align: center;
+  padding: 1.8rem 1rem; // hero plus petit
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 2rem;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top, rgba(255,255,255,0.15), transparent 65%);
+  }
+
+  h1 {
+    font-size: clamp(1.6rem, 3.5vw, 2rem); // titre plus petit
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  p {
+    font-size: 1rem; // description compacte
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+}
+
+// =========================
+// SECTION PRINCIPALE
+// =========================
+.section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: $bleu;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+}
+
+// =========================
+// GRILLE D'ÉVÉNEMENTS
+// =========================
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+// =========================
+// CARTE ÉVÉNEMENT
+// =========================
+.event-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,38,100,0.1);
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, $bleu 0%, $jaune 50%, $rouge 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0,38,100,0.2);
+
+    &::before {
+      opacity: 1;
+    }
+
+    img {
+      transform: scale(1.05);
+    }
+
+    .content h3 {
+      color: $jaune;
+    }
+  }
+
+  img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .content {
+    padding: 1.5rem;
+
+    h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: $bleu;
+      margin-bottom: 0.75rem;
+      transition: color 0.3s ease;
+      line-height: 1.3;
+    }
+
+    p {
+      color: $gray;
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      &::before {
+        content: '📍';
+      }
+    }
+
+    span {
+      display: inline-block;
+      background: linear-gradient(135deg, $bleu, #003d96);
+      color: white;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-top: 0.75rem;
+    }
+  }
+
+  // Événements passés
+  &.past {
+    opacity: 0.7;
+    filter: grayscale(30%);
+
+    .content span {
+      background: linear-gradient(135deg, #64748b, #475569);
+    }
+
+    &:hover {
+      opacity: 0.85;
+      filter: grayscale(0%);
+    }
+  }
+}
+
+// =========================
+// MESSAGE CHARGEMENT / ERREUR
+// =========================
+p {
+  text-align: center;
+  color: $gray;
+  font-size: 1.1rem;
+  padding: 2rem;
+}
+
+// =========================
+// RESPONSIVE
+// =========================
+@media (max-width: 768px) {
+  .hero-events {
+    padding: 2rem 1rem;
+
+    h1 {
+      font-size: 1.8rem;
+    }
+
+    p {
+      font-size: 0.95rem;
+    }
+  }
+
+  .section {
+    padding: 2rem 1rem;
+
+    h2 {
+      font-size: 1.5rem;
+    }
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-events {
+    padding: 1.5rem 1rem;
+
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    p {
+      font-size: 0.9rem;
+    }
+  }
+
+  .event-card img {
+    height: 200px;
+  }
+}

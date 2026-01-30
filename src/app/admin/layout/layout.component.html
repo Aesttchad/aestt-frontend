@@ -1,0 +1,17 @@
+<div class="admin-container">
+  <app-admin-sidebar></app-admin-sidebar>
+
+  <div class="admin-main">
+    <header>
+      <div class="header-left">Dashboard AESTT</div>
+      <div class="header-right">
+<span>{{ (auth.user$ | async)?.name }}</span>
+        <button class="btn-logout" (click)="auth.logout()">Déconnexion</button>
+      </div>
+    </header>
+
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

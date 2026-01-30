@@ -1,0 +1,35 @@
+.btn-add {
+  display: inline-block;
+  margin-bottom: 1rem;
+  background: #0f766e;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+table {
+  width: 100%;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+th, td {
+  padding: 1rem;
+  text-align: left;
+}
+
+th {
+  background: #f1f5f9;
+}
+
+tr {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}

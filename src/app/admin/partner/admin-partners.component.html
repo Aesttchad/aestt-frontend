@@ -1,0 +1,28 @@
+<h1>Gestion des partenaires</h1>
+<a routerLink="/admin/partners/new" class="btn btn-primary">+ Nouveau partenaire</a>
+
+<div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+<table *ngIf="!isLoading; else loading" class="table">
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Catégorie</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let partner of partners">
+      <td>{{ partner.name }}</td>
+      <td>{{ partner.category }}</td>
+      <td>
+        <a [routerLink]="['/admin/partners/edit', partner._id]" class="btn btn-warning btn-sm">✏️</a>
+        <button (click)="deletePartner(partner._id)" class="btn btn-danger btn-sm">🗑️</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #loading>
+  <p>Chargement des partenaires...</p>
+</ng-template>

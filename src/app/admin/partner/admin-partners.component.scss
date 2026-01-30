@@ -1,0 +1,31 @@
+.btn-add {
+  display: inline-block;
+  margin-bottom: 15px;
+  background: #16a34a;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+  img {
+    border-radius: 6px;
+  }
+
+  button {
+    background: red;
+    color: white;
+    border: none;
+    padding: 4px 6px;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,40 @@
+<section class="admin-page">
+  <h1>Messages reçus</h1>
+
+  <div *ngIf="isLoading">Chargement...</div>
+
+  <table *ngIf="!isLoading && messages.length > 0">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Email</th>
+        <th>Sujet</th>
+        <th>Message</th>
+        <th>Date</th>
+        <th>Statut</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let m of messages" [class.unread]="!m.isRead">
+        <td>{{ m.fullName }}</td>
+        <td>{{ m.email }}</td>
+        <td>{{ m.subject || '-' }}</td>
+        <td>{{ m.message | slice:0:80 }}...</td>
+        <td>{{ m.createdAt | date:'short' }}</td>
+        <td>
+          <span [ngClass]="m.isRead ? 'read' : 'unread'">
+            {{ m.isRead ? 'Lu' : 'Non lu' }}
+          </span>
+        </td>
+        <td>
+          <button *ngIf="!m.isRead" (click)="markRead(m)">Marquer lu</button>
+          <button class="danger" (click)="delete(m._id!)">Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="!isLoading && messages.length === 0">Aucun message pour le moment.</p>
+  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+</section>

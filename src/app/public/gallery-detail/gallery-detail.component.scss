@@ -1,0 +1,87 @@
+/* =========================
+   Styles Galerie Détail
+========================= */
+h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  color: #555;
+}
+
+/* Grid des images */
+.gallery-images {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+
+  img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+  }
+}
+
+/* Lightbox overlay */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  cursor: pointer;
+
+  img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    animation: zoomIn 0.3s ease;
+  }
+}
+
+/* Animation légère pour la lightbox */
+@keyframes zoomIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Retour à la galerie */
+a {
+  display: inline-block;
+  margin-top: 20px;
+  text-decoration: none;
+  color: #007BFF;
+  font-weight: 500;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+/* Messages d’erreur */
+.error {
+  color: red;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .gallery-images img {
+    height: 80px;
+  }
+}

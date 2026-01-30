@@ -1,0 +1,11 @@
+<section *ngIf="partner" class="partner-detail-section">
+  <img [src]="partner.logo || 'assets/default-partner.png'" width="120" alt="{{ partner.name }}">
+  <h1>{{ partner.name }}</h1>
+  <p>{{ partner.description }}</p>
+  <a *ngIf="partner.website" [href]="partner.website" target="_blank">
+    Visiter le site
+  </a>
+</section>
+<ng-template #loading>
+  <p>Chargement du partenaire...</p>
+</ng-template>

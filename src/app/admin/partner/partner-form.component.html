@@ -1,0 +1,18 @@
+<h1>{{ isEdit ? 'Modifier' : 'Créer' }} un partenaire</h1>
+<div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+<form (ngSubmit)="submit()">
+  <input type="text" placeholder="Nom" [(ngModel)]="partner.name" name="name" required>
+  <textarea placeholder="Description" [(ngModel)]="partner.description" name="description"></textarea>
+  <input type="text" placeholder="Site web" [(ngModel)]="partner.website" name="website">
+
+  <label>Logo</label>
+  <input type="file" (change)="onFileChange($event)">
+
+  <select [(ngModel)]="partner.category" name="category">
+    <option value="institution">Institution</option>
+    <option value="sponsor">Sponsor</option>
+  </select>
+
+  <button type="submit">{{ isEdit ? 'Mettre à jour' : 'Créer' }}</button>
+</form>

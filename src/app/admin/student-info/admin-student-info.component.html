@@ -1,0 +1,28 @@
+<h1>Informations Étudiants</h1>
+
+<a routerLink="/admin/student-info/new" class="btn-add">
+  + Nouvelle information
+</a>
+
+<table *ngIf="!isLoading">
+  <thead>
+    <tr>
+      <th>Titre</th>
+      <th>Catégorie</th>
+      <th>Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let info of infos">
+      <td>{{ info.title }}</td>
+      <td>{{ info.category }}</td>
+      <td>{{ info.createdAt | date:'shortDate' }}</td>
+      <td>
+        <a [routerLink]="['/admin/student-info/edit', info._id]">✏️</a>
+        <button (click)="deleteInfo(info._id)">🗑️</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
